@@ -2,5 +2,6 @@
   "latest_version": "1.0.0",
   "is_force_update": false,
   "message": "New features added!",
-  "enable_update_check":false
+  "enable_update_check":false,
+  "hide_ads": true
 }
