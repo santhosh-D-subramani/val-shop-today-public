@@ -2,7 +2,7 @@
   "latest_version": "1.2.2",
   "is_force_update": false,
   "message": "New features added!",
-  "enable_update_check":false,
-  "hide_ads": true,
-   "hide_app_open_ads": true
+  "enable_update_check":true,
+  "hide_ads": false,
+  "hide_app_open_ads": true
 }
