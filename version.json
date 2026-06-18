@@ -1,7 +1,7 @@
 {
-  "latest_version": "1.2.2",
+  "latest_version": "1.3.0",
   "is_force_update": false,
-  "message": "New features added!",
+  "message": "New Ui Added & Session issue fixes!",
   "enable_update_check":true,
   "hide_ads": false,
   "hide_app_open_ads": true
