@@ -1,1 +1,29 @@
-
+{
+    "name": "SanthoshDsubramani Apps",
+    "subtitle": "for self",
+    "description": "nahhh",
+    "iconURL": "https://raw.githubusercontent.com/santhosh-D-subramani/val-shop-today-public/1d59c88f340e29243c6e59a4416c69cb4d4fac24/assets/play_store_512.png",
+    "website": "https://santhoshdsubramani.in",
+    "tintColor": "#4185A9",
+    "apps": [
+        {
+            "name": "ValShop",
+            "bundleIdentifier": "com.santhoshDsubramani.val_shop",
+            "developerName": "Santhosh Subramani",
+            "subtitle": "track daily store of valorant",
+            "localizedDescription": "",
+            "iconURL": "https://raw.githubusercontent.com/santhosh-D-subramani/val-shop-today-public/1d59c88f340e29243c6e59a4416c69cb4d4fac24/assets/play_store_512.png",
+            "tintColor": "#5CA399",
+            "versions": [
+                {
+                    "version": "1.4.3",
+                    "date": "2026-08-24T00:00:00-00:00",
+                    "size": 14155776,
+                    "downloadURL": "https://github.com/santhosh-D-subramani/val-shop-today-public/releases/download/latest/ValShop.ipa",
+                    "localizedDescription": "Initial manual release."
+                }
+            ]
+        }
+    ],
+    "news": []
+}
