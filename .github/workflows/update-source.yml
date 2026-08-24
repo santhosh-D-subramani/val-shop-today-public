@@ -1,0 +1,71 @@
+name: Update AltStore Source
+on:
+  release:
+    types: [published]
+
+jobs:
+  update_source:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get IPA asset info
+        id: asset
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const release = context.payload.release;
+            const asset = release.assets.find(a => a.name.endsWith('.ipa'));
+            if (!asset) throw new Error('No .ipa asset found in this release');
+            core.setOutput('url', asset.browser_download_url);
+            core.setOutput('size', asset.size);
+            core.setOutput('version', release.tag_name.replace(/^v/, ''));
+            core.setOutput('date', release.published_at);
+
+      - name: Update source.json
+        env:
+          VERSION: ${{ steps.asset.outputs.version }}
+          DATE: ${{ steps.asset.outputs.date }}
+          SIZE: ${{ steps.asset.outputs.size }}
+          IPA_URL: ${{ steps.asset.outputs.url }}
+          BUNDLE_ID: com.santhoshDsubramani.val_shop
+        run: |
+          python3 - <<'EOF'
+          import json, os
+
+          path = "source.json"
+          with open(path) as f:
+              data = json.load(f)
+
+          bundle_id = os.environ["BUNDLE_ID"]
+          new_version = {
+              "version": os.environ["VERSION"],
+              "date": os.environ["DATE"],
+              "size": int(os.environ["SIZE"]),
+              "downloadURL": os.environ["IPA_URL"],
+              "localizedDescription": f"Automated build {os.environ['VERSION']}"
+          }
+
+          app = next((a for a in data["apps"] if a["bundleIdentifier"] == bundle_id), None)
+          if app is None:
+              raise SystemExit(f"App {bundle_id} not found in source.json")
+
+          app["versions"] = [v for v in app["versions"] if v["version"] != new_version["version"]]
+          app["versions"].insert(0, new_version)
+
+          with open(path, "w") as f:
+              json.dump(data, f, indent=4)
+          EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add source.json
+          git diff --cached --quiet && echo "No changes" || git commit -m "Update ValShop to v${{ steps.asset.outputs.version }}"
+          git push
