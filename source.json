@@ -16,6 +16,13 @@
             "tintColor": "#5CA399",
             "versions": [
                 {
+                    "version": "1.4.84",
+                    "date": "2026-09-01T16:37:07.760Z",
+                    "size": 13841212,
+                    "downloadURL": "https://github.com/santhosh-D-subramani/val-shop-today-public/releases/download/v1.4.84/ValShop.ipa",
+                    "localizedDescription": "Automated build 1.4.84"
+                },
+                {
                     "version": "1.4.43",
                     "date": "2026-08-24T04:45:07.758Z",
                     "size": 14205339,
